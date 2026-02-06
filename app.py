@@ -1,22 +1,12 @@
-from flask import Flask, request, jsonify
-import subprocess
-import os
+from flask import Flask
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "converter alive"
+    return "nekobi converter alive"
 
-@app.route("/convert", methods=["POST"])
-def convert():
-    file = request.files["file"]
-    input_path = "/tmp/input.xlsx"
-    file.save(input_path)
-
-    # converter実行
-    subprocess.run(["python", "converter_v10.py", input_path], check=True)
-
-    # 生成されたJSONを読む
-    with open("output.json", "r", encoding="utf-8") as f:
-        return f.read(), 200, {"Content-Type": "application/json"}
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
