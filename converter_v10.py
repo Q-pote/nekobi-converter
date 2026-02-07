@@ -3,9 +3,11 @@ import json
 import os
 import glob
 import numpy as np
+import sys
 
 # --- 設定 ---
-INPUT_EXCEL = 'neko_finance.xlsx'
+# INPUT_EXCEL = 'neko_finance.xlsx'
+excel_path = sys.argv[1] if len(sys.argv) > 1 else "neko_finance.xlsx"
 OUTPUT_FILE = 'js/data/data.js'
 
 class NpEncoder(json.JSONEncoder):
